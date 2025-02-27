@@ -1,13 +1,15 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
+
+import models
 import schemas
 import crud
-from db import engine, Base, get_db
+from db import get_db
 
 
 app = FastAPI()
 
-Base.metadata.create_all(bind=engine)
+models.init_db()
 
 @app.get("/")
 async def root():
